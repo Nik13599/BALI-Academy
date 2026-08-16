@@ -88,3 +88,30 @@ jobs:
             -configuration Debug \
             CODE_SIGNING_ALLOWED=NO \
             build
+
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install desktop dependencies
+        working-directory: admin-desktop
+        run: npm install
+
+      - name: Build NSIS installer
+        working-directory: admin-desktop
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npm run dist:win
+
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: BALI-Academy-Admin-Windows
+          path: admin-desktop/dist/*.exe
+          if-no-files-found: error
+          retention-days: 30
