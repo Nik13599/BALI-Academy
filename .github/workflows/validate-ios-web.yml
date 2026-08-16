@@ -1,0 +1,48 @@
+name: Validate iPhone Web App
+
+on:
+  push:
+    branches:
+      - ios-mobile
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate inline JavaScript syntax
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          html = Path('mobile-web/index.html').read_text(encoding='utf-8')
+          start = html.index('<script>') + len('<script>')
+          end = html.index('</script>', start)
+          Path('/tmp/mobile-inline.js').write_text(html[start:end], encoding='utf-8')
+          print('Extracted inline JavaScript')
+          PY
+          node --check /tmp/mobile-inline.js
+      - name: Validate configuration profile
+        run: |
+          python - <<'PY'
+          import plistlib
+          from pathlib import Path
+          with Path('mobile-web/BALI-Academy.mobileconfig').open('rb') as f:
+              profile = plistlib.load(f)
+          webclip = profile['PayloadContent'][0]
+          assert webclip['PayloadType'] == 'com.apple.webClip.managed'
+          assert webclip['URL'].startswith('https://raw.githack.com/Nik13599/BALI-Academy/ios-mobile/')
+          assert webclip['FullScreen'] is True
+          print('mobileconfig OK:', webclip['URL'])
+          PY
+      - name: Validate content files
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('content/knowledge.json','utf8')); JSON.parse(require('fs').readFileSync('content/cocktails-extra.json','utf8')); console.log('content JSON OK')"
+      - name: Confirm white-screen safeguards
+        run: |
+          grep -q 'Запуск приложения' mobile-web/index.html
+          grep -q 'Не удалось запустить приложение' mobile-web/index.html
+          grep -q "const base='../content/'" mobile-web/index.html
