@@ -10,15 +10,15 @@
       <key>PayloadVersion</key>
       <integer>1</integer>
       <key>PayloadIdentifier</key>
-      <string>by.bali.academy.webclip</string>
+      <string>by.bali.academy.webclip.v2</string>
       <key>PayloadUUID</key>
-      <string>885B7938-F08C-4D58-8176-5AE358921914</string>
+      <string>BC5940F7-B8E5-450A-A2C3-8B6ED3AAB8AD</string>
       <key>PayloadDisplayName</key>
       <string>BALI Academy</string>
       <key>Label</key>
       <string>BALI Academy</string>
       <key>URL</key>
-      <string>https://bali-academy-mobile-kolyaselekh-9471s-projects.vercel.app/</string>
+      <string>https://raw.githack.com/Nik13599/BALI-Academy/ios-mobile/mobile-web/index.html</string>
       <key>FullScreen</key>
       <true/>
       <key>IsRemovable</key>
@@ -32,13 +32,13 @@
   <key>PayloadVersion</key>
   <integer>1</integer>
   <key>PayloadIdentifier</key>
-  <string>by.bali.academy.mobileconfig</string>
+  <string>by.bali.academy.mobileconfig.v2</string>
   <key>PayloadUUID</key>
-  <string>00B28126-85D3-4C6F-BAE2-8EFDB01D8B30</string>
+  <string>C5918258-5258-43D9-A364-9C2B1AEB7963</string>
   <key>PayloadDisplayName</key>
-  <string>BALI Academy for iPhone</string>
+  <string>BALI Academy for iPhone v2</string>
   <key>PayloadDescription</key>
-  <string>Устанавливает BALI Academy на экран Домой как полноэкранное приложение для обучения персонала.</string>
+  <string>Исправленная версия BALI Academy: полноэкранное приложение для обучения персонала, база и тесты загружаются напрямую из GitHub.</string>
   <key>PayloadOrganization</key>
   <string>BALI</string>
   <key>PayloadRemovalDisallowed</key>
