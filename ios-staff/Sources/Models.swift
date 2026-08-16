@@ -136,7 +136,7 @@ struct ProgressResponse: Codable {
 }
 
 struct AIOption: Codable, Identifiable {
-    let type: String
+    let type: String?
     let id: String
     let name: String
 }
