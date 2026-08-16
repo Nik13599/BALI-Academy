@@ -201,7 +201,11 @@ export async function loadBundle() {
   const compiled = await githubGet('content/bundle.json');
   if (compiled) return JSON.parse(compiled.text);
 
-  const [menuFile, knowledgeFile] = await Promise.all([githubGet('content/menu.csv'), githubGet('content/knowledge.json')]);
+  const [menuFile, knowledgeFile, extraCocktailsFile] = await Promise.all([
+    githubGet('content/menu.csv'),
+    githubGet('content/knowledge.json'),
+    githubGet('content/cocktails-extra.json')
+  ]);
   if (!menuFile || !knowledgeFile) throw new Error('Content files not found');
   const knowledge = JSON.parse(knowledgeFile.text);
   const details = knowledge.productDetails || {};
@@ -220,7 +224,9 @@ export async function loadBundle() {
       needsReview: !!d.needsReview
     };
   });
-  return { ...knowledge, products };
+  const extras = extraCocktailsFile ? JSON.parse(extraCocktailsFile.text) : [];
+  const cocktails = [...(knowledge.cocktails || []), ...extras];
+  return { ...knowledge, cocktails, products };
 }
 
 export function publicProduct(product, role) {
