@@ -1,0 +1,44 @@
+name: Deploy BALI Academy iPhone Web App
+
+on:
+  push:
+    branches:
+      - main
+      - agent/bali-academy-apps
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Prepare mobile site
+        run: |
+          mkdir -p _site/content
+          cp mobile-web/index.html _site/index.html
+          cp mobile-web/styles.css _site/styles.css
+          cp mobile-web/app.js _site/app.js
+          cp mobile-web/manifest.webmanifest _site/manifest.webmanifest
+          cp mobile-web/BALI-Academy.mobileconfig _site/BALI-Academy.mobileconfig
+          cp content/knowledge.json _site/content/knowledge.json
+          cp content/cocktails-extra.json _site/content/cocktails-extra.json
+          printf '' > _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
