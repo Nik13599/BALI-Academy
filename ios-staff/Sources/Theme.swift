@@ -8,16 +8,21 @@ enum BALITheme {
 
 struct BALIInfoBlock: View {
     let title: String
-    let body: String
-    var bodyView: some View {
+    let text: String
+
+    init(title: String, body: String) {
+        self.title = title
+        self.text = body
+    }
+
+    var body: some View {
         VStack(alignment: .leading, spacing: 7) {
             Text(title).font(.caption.bold()).foregroundStyle(.secondary)
-            Text(body).font(.body).lineSpacing(4)
+            Text(text).font(.body).lineSpacing(4)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
         .background(BALITheme.panel)
         .clipShape(RoundedRectangle(cornerRadius: 15))
     }
-    var body: some View { bodyView }
 }
