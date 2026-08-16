@@ -21,6 +21,7 @@ function status(message, type='ok') {
 
 function roleLabel(role) { return role === 'bartender' ? 'Бармен' : role === 'waiter' ? 'Официант' : role; }
 function fmtDate(v) { if (!v) return '—'; try { return new Date(v).toLocaleString('ru-RU'); } catch { return v; } }
+function escapeHtml(v='') { return String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 
 function showTab(name) {
   $$('.tab').forEach(x => x.classList.toggle('active', x.id === name));
@@ -38,6 +39,7 @@ async function loadEmployees() {
     employees = data.employees || [];
     renderDashboard();
     renderEmployeeList();
+    if (selectedEmployeeId) renderEmployeeDetail();
   } catch (e) {
     status(`Не удалось загрузить сотрудников: ${e.message}`, 'error');
   }
@@ -72,18 +74,41 @@ function renderEmployeeList() {
   $$('.employee-card').forEach(b => b.addEventListener('click', () => { selectedEmployeeId = b.dataset.id; renderEmployeeList(); renderEmployeeDetail(); }));
 }
 
+function attemptHTML(a, i) {
+  const errors = a.errors || [];
+  const errorHtml = errors.length ? errors.map(err => `
+    <div class="attempt-error">
+      <div><b>${escapeHtml(err.topic || err.questionId || 'Ошибка')}</b></div>
+      <div>Ответ сотрудника: <span class="bad">${escapeHtml(err.selected || '—')}</span></div>
+      <div>Правильно: <span class="good">${escapeHtml(err.correct || '—')}</span></div>
+    </div>`).join('') : '<div class="attempt-ok">Ошибок нет.</div>';
+  return `<details class="attempt" ${i===0?'open':''}>
+    <summary>
+      <div><strong>${escapeHtml(a.category || 'mixed')}</strong><span>Уровень ${a.level ?? '—'} • ${fmtDate(a.completedAt)}</span></div>
+      <div class="attempt-score">${a.correct ?? 0}/${a.total ?? 0} • ${a.percent ?? 0}%</div>
+    </summary>
+    <div class="attempt-body">
+      <div class="attempt-meta">Режим: ${escapeHtml(a.mode || 'training')} • Ошибок: ${errors.length} • Устройство: ${escapeHtml(a.deviceId || '—')}</div>
+      ${errorHtml}
+    </div>
+  </details>`;
+}
+
 function renderEmployeeDetail() {
   const e = employees.find(x => x.id === selectedEmployeeId);
   if (!e) return;
   const cats = Object.entries(e.stats?.categories || {}).sort((a,b)=>a[1]-b[1]);
   const weak = e.stats?.weak || [];
+  const attempts = e.attempts || [];
   $('#employeeDetail').innerHTML = `
     <div class="detail-head"><div><span class="role-pill">${roleLabel(e.role)}</span><h2>${escapeHtml(e.fio)}</h2><p>Устройств: ${e.deviceCount||0} • Последняя активность: ${fmtDate(e.lastSeenAt)}</p></div><div class="big-score">${e.stats?.avg||0}%<small>средний</small></div></div>
     <div class="mini-stats"><div><span>Попыток</span><b>${e.stats?.totalAttempts||0}</b></div><div><span>Лучший</span><b>${e.stats?.best||0}%</b></div><div><span>Последний тест</span><b>${fmtDate(e.stats?.lastAttemptAt)}</b></div></div>
     <h3>Результаты по категориям</h3>
     <div class="category-bars">${cats.length ? cats.map(([name,score])=>`<div class="bar-row"><span>${escapeHtml(name)}</span><div><i style="width:${Math.max(0,Math.min(100,score))}%"></i></div><b>${score}%</b></div>`).join('') : '<div class="empty">Нет данных</div>'}</div>
     <h3>Слабые вопросы</h3>
-    <div class="weak-list">${weak.length ? weak.map(w=>`<span>${escapeHtml(w.key)} <b>×${w.count}</b></span>`).join('') : '<div class="empty">Ошибок пока нет</div>'}</div>`;
+    <div class="weak-list">${weak.length ? weak.map(w=>`<span>${escapeHtml(w.key)} <b>×${w.count}</b></span>`).join('') : '<div class="empty">Ошибок пока нет</div>'}</div>
+    <h3>Полная история тестирования</h3>
+    <div class="attempts">${attempts.length ? attempts.map(attemptHTML).join('') : '<div class="empty">Попыток пока нет</div>'}</div>`;
 }
 
 async function loadContent() {
@@ -111,8 +136,6 @@ $('#saveSettingsBtn').addEventListener('click', async () => {
 $('#refreshBtn').addEventListener('click', () => { loadEmployees(); if ($('#content').classList.contains('active')) loadContent(); });
 $('#employeeSearch').addEventListener('input', renderEmployeeList);
 $('#roleFilter').addEventListener('change', renderEmployeeList);
-
-function escapeHtml(v='') { return String(v).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 
 (async function init(){
   const s = await window.baliAdmin.getSettings();
