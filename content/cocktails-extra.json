@@ -1,0 +1,23 @@
+[
+  {
+    "id": "ckt-long-island-iced-tea",
+    "name": "Long Island Iced Tea",
+    "aliases": ["лонг айленд", "лонгайленд", "лонг исланд", "long iland", "long island", "longisland", "лонг айленд айс ти"],
+    "trainingRecipe": true,
+    "operationalRecipe": false,
+    "ingredients": [
+      {"name":"Vodka","ml":15},
+      {"name":"Tequila","ml":15},
+      {"name":"White Rum","ml":15},
+      {"name":"Gin","ml":15},
+      {"name":"Cointreau","ml":15},
+      {"name":"Lemon Juice","ml":25},
+      {"name":"Simple Syrup","ml":30},
+      {"name":"Cola"}
+    ],
+    "method": "Build all ingredients in a Highball filled with ice, top with Cola and stir gently.",
+    "glass": "Highball",
+    "garnish": "Lemon slice (optional)",
+    "note": "Учебная классическая рецептура. Рабочая техкарта BALI имеет приоритет."
+  }
+]

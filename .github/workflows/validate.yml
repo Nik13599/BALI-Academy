@@ -1,0 +1,117 @@
+name: Validate BALI Academy
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  node-content:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate Node syntax
+        run: |
+          set -e
+          for file in sync-gateway/api/*.mjs admin-desktop/*.cjs admin-desktop/renderer.js; do
+            echo "Checking $file"
+            node --check "$file"
+          done
+
+      - name: Validate JSON content
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const files = [
+            'content/knowledge.json',
+            'content/cocktails-extra.json',
+            'sync-gateway/package.json',
+            'sync-gateway/vercel.json',
+            'admin-desktop/package.json'
+          ];
+          for (const file of files) {
+            JSON.parse(fs.readFileSync(file, 'utf8'));
+            console.log('OK', file);
+          }
+          NODE
+
+      - name: Validate menu catalog
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const rows = fs.readFileSync('content/menu.csv', 'utf8').trim().split(/\r?\n/);
+          if (rows.length < 100) throw new Error(`Menu unexpectedly short: ${rows.length - 1} items`);
+          const header = rows[0].split(';');
+          if (header.length !== 6) throw new Error('Unexpected menu.csv schema');
+          console.log(`Menu entries: ${rows.length - 1}`);
+          NODE
+
+      - name: Scan repository for common committed token patterns
+        run: |
+          if grep -RInE '(github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9_-]{20,})' . --exclude-dir=.git; then
+            echo 'Possible secret detected'
+            exit 1
+          fi
+
+      - name: Install gateway dependencies
+        working-directory: sync-gateway
+        run: npm install --ignore-scripts
+
+      - name: Install desktop dependencies
+        working-directory: admin-desktop
+        run: npm install --ignore-scripts
+
+  ios:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        working-directory: ios-staff
+        run: xcodegen generate
+
+      - name: Build iOS app without signing
+        working-directory: ios-staff
+        run: |
+          xcodebuild \
+            -project BALIStaff.xcodeproj \
+            -scheme BALIStaff \
+            -sdk iphonesimulator \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install desktop dependencies
+        working-directory: admin-desktop
+        run: npm install
+
+      - name: Build NSIS installer
+        working-directory: admin-desktop
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npm run dist:win
+
+      - name: Upload Windows installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: BALI-Academy-Admin-Windows
+          path: admin-desktop/dist/*.exe
+          if-no-files-found: error
+          retention-days: 30
