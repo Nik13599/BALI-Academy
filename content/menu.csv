@@ -1,0 +1,114 @@
+name;category;country;portion_or_glass_byn;bottle_byn;volume_ml
+Laphroaig Select;Виски;Scotland;60;1500;700
+Macallan 12;Виски;Scotland;90;1575;700
+Macallan 15;Виски;Scotland;;2500;700
+Macallan 18;Виски;Scotland;;5000;700
+Glenfiddich 12;Виски;Scotland;34;595;700
+Glenfiddich 15;Виски;Scotland;86;1505;700
+Johnnie Walker RED Label;Виски;Scotland;22;550;1000
+Johnnie Walker BLACK Label;Виски;Scotland;36;900;1000
+Johnnie Walker BLUE Label;Виски;Scotland;;3000;700
+Tullamore D.E.W.;Виски;Ireland;30;525;700
+Jack Daniel's;Виски;USA;30;750;700
+Jack Daniel's Fire;Виски;USA;38;665;700
+The Deacon;Виски;Scotland;34;595;700
+Monkey Shoulder;Виски;Scotland;34;850;700
+Maker's Mark;Виски;USA;36;900;1000
+Jack Daniel's Honey;Виски;USA;32;560;700
+Bushmills;Виски;Ireland;18;450;1000
+Chivas Regal 12;Виски;Scotland;32;800;1000
+Chivas Regal 18;Виски;Scotland;;1500;700
+Chivas Regal 21;Виски;Scotland;;2200;700
+Jameson;Виски;Ireland;23;575;1000
+Jameson Crested;Виски;Ireland;32;560;700
+Jameson Stout Edition;Виски;Ireland;28;490;700
+Bumbu The Original;Ром;Barbados;32;560;700
+Bumbu XO;Ром;Barbados;40;700;700
+Matusalem Gran Reserva 15;Ром;Dominican Republic;34;595;700
+Matusalem Gran Reserva 23;Ром;Dominican Republic;;1300;700
+Plantation Original Dark;Ром;France;24;420;700
+Plantation Pineapple;Ром;France;34;595;700
+Plantation XO;Ром;France;44;770;700
+Dictador 12;Ром;Colombia;34;595;700
+Bacardi Negra;Ром;Cuba;20;500;1000
+Bacardi Spiced;Ром;Cuba;22;550;1000
+Captain Morgan Dark;Ром;Jamaica;20;500;1000
+Captain Morgan Spiced;Ром;Jamaica;22;550;1000
+Kraken;Ром;Caribbean;26;650;1000
+Bulldog;Джин;England;34;595;700
+Bombay Sapphire;Джин;England;24;600;1000
+Hendrick's;Джин;Scotland;38;665;700
+Monkey 47;Джин;Germany;32;400;500
+Beefeater;Джин;England;22;275;500
+Espolon Blanco;Текила;Mexico;24;450;750
+Espolon Reposado;Текила;Mexico;24;450;750
+Patron Reposado;Текила;Mexico;60;1050;700
+Patron Silver;Текила;Mexico;60;1050;700
+Clase Azul Reposado;Текила;Mexico;;3000;700
+Grey Goose;Водка;France;38;950;1000
+Finlandia;Водка;Finland;20;500;1000
+Absolut;Водка;Sweden;20;350;700
+Vseslav Charodey;Водка;Belarus;18;315;700
+Campari;Аперитив / биттер;Italy;20;500;1000
+Cynar;Амаро / биттер;Italy;24;420;700
+Frangelico;Ликёр;Italy;30;525;700
+Aperol;Аперитив;Italy;20;500;1000
+Sarti Rosa;Аперитив;Italy;22;385;700
+Bumbu Cream;Сливочный ликёр;Barbados;26;455;700
+Jagermeister;Травяной ликёр;Germany;22;550;1000
+Jagermeister Manifest;Травяной ликёр;Germany;32;800;1000
+Jagermeister Orange;Травяной ликёр;Germany;30;750;1000
+Becherovka;Травяной ликёр;Czech Republic;20;350;700
+Fireball;Ликёр на основе виски;Canada;20;500;1000
+Pernod Absinthe;Абсент;France;30;525;700
+Martini Extra Dry;Вермут;Italy;14;350;1000
+Martini Rosso;Вермут;Italy;14;350;1000
+Martini Bianco;Вермут;Italy;14;350;1000
+Martini Fiero;Вермут / аперитив;Italy;16;400;1000
+Courvoisier VS;Коньяк;France;60;1050;700
+Courvoisier VSOP;Коньяк;France;64;1120;700
+Hennessy VS;Коньяк;France;44;770;700
+Hennessy VSOP;Коньяк;France;70;1225;700
+Hennessy XO;Коньяк;France;240;4200;700
+Torres 10;Бренди;Spain;22;385;700
+Miller;Пиво;Belarus;15;;450
+Maison Arne Blanche;Пиво;Belarus;15;;400
+Krushovice Alco 0%;Безалкогольное пиво;Belarus;10;;330
+Corona Extra;Пиво;Mexico;20;;335
+Casillero del Diablo Sauvignon Blanc;Белое вино;Chile;24;144;750
+Villa Wolf Gewurztraminer;Белое вино;Germany;36;216;750
+Chablis Premier Cru;Белое вино;France;200;1200;750
+Gustave Lorentz Riesling Reserve;Белое вино;France;38;228;750
+Domaine Marguerite Carillon;Белое вино;France;30;180;750
+Casillero del Diablo Carmenere;Красное вино;Chile;24;144;750
+Planeta La Segreta Il Rosso;Красное вино;Italy;36;216;750
+Ca'Bianca Barolo DOCG;Красное вино;Italy;150;900;750
+Cioccolate Tube Primitivo;Красное вино;Italy;40;240;750
+The Dogfather Zinfandel Reserve;Красное вино;USA;46;276;750
+Cinzano Asti;Игристое вино;Italy;28;168;750
+Prosecco Bea Vita;Игристое вино;Italy;26;156;750
+Mazet Brut;Игристое вино;France;26;156;750
+Luc Belaire Rosé;Игристое вино;France;;500;750
+Luc Belaire Brut;Игристое вино;France;;500;750
+Veuve Clicquot Brut;Champagne;France;;1500;750
+Moet & Chandon Brut;Champagne;France;;850;750
+Moet & Chandon Rosé;Champagne;France;;950;750
+Bottega Gold Prosecco;Игристое вино;Italy;75;450;750
+Bottega Rose Gold Pinot Nero;Игристое вино;Italy;90;540;750
+Mumm Brut;Champagne;France;;750;750
+Dom Perignon Brut;Champagne;France;;6000;750
+Ruinart Blanc de Blancs;Champagne;France;;3000;750
+Nozeco;Безалкогольное игристое;France;18;108;750
+Light House White;Безалкогольное вино;Germany;18;108;750
+Light House Rosé;Безалкогольное вино;Germany;18;108;750
+Rich Juice;Безалкогольные напитки;Belarus;10;;200
+Coca-Cola / Schweppes / Sprite;Безалкогольные напитки;Belarus;10;;330
+Coca-Cola Zero;Безалкогольные напитки;Belarus;10;;330
+Red Bull;Энергетик;Austria;15;;250
+Red Bull Zero;Энергетик;Austria;15;;250
+Боровая газ/негаз;Вода;Belarus;10;;200
+Tassay газ/негаз;Вода;Kazakhstan;40;;750
+Американо;Кофе;;10;;1
+Эспрессо;Кофе;;10;;1
+Черный чай;Чай;;10;;1
+Зеленый чай;Чай;;10;;1
