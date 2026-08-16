@@ -42,7 +42,8 @@ export default async function handler(req, res) {
         createdAt: employee.createdAt,
         lastSeenAt: employee.lastSeenAt,
         deviceCount: (employee.devices || []).length,
-        stats: summarize(attempts)
+        stats: summarize(attempts),
+        attempts: attempts.slice().reverse()
       });
     }
     employees.sort((a,b) => String(a.fio).localeCompare(String(b.fio), 'ru'));
