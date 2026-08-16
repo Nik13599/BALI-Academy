@@ -1,0 +1,10 @@
+{
+  "name": "BALI Academy",
+  "short_name": "BALI Academy",
+  "description": "Обучение барменов и официантов BALI",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#08090b",
+  "theme_color": "#08090b",
+  "lang": "ru"
+}
