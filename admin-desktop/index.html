@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BALI Academy Admin</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">B</div><div><strong>BALI</strong><span>ACADEMY ADMIN</span></div></div>
+      <nav>
+        <button class="nav active" data-tab="dashboard">Обзор</button>
+        <button class="nav" data-tab="employees">Сотрудники</button>
+        <button class="nav" data-tab="content">База знаний</button>
+        <button class="nav" data-tab="settings">Настройки</button>
+      </nav>
+      <div class="sidebar-foot">GitHub-backed • без БД</div>
+    </aside>
+    <main>
+      <header><div><h1 id="pageTitle">Обзор</h1><p id="pageSubtitle">Обучение и результаты персонала</p></div><button id="refreshBtn" class="ghost">Обновить</button></header>
+      <section id="status" class="status hidden"></section>
+
+      <section id="dashboard" class="tab active">
+        <div id="stats" class="stats"></div>
+        <div class="panel"><div class="panel-head"><h2>Последняя активность</h2></div><div id="recent"></div></div>
+      </section>
+
+      <section id="employees" class="tab">
+        <div class="toolbar">
+          <input id="employeeSearch" placeholder="Поиск по ФИО" />
+          <select id="roleFilter"><option value="all">Все роли</option><option value="bartender">Бармен</option><option value="waiter">Официант</option></select>
+        </div>
+        <div class="employee-layout"><div id="employeeList" class="employee-list"></div><div id="employeeDetail" class="panel detail"><div class="empty">Выберите сотрудника</div></div></div>
+      </section>
+
+      <section id="content" class="tab">
+        <div class="panel">
+          <div class="panel-head"><div><h2>Единый контент BALI Academy</h2><p>Продукты, уроки, коктейли, тесты и настройки. После публикации изменения сразу доступны персоналу.</p></div><button id="saveContentBtn" class="primary">Опубликовать</button></div>
+          <textarea id="contentEditor" spellcheck="false"></textarea>
+        </div>
+      </section>
+
+      <section id="settings" class="tab">
+        <div class="panel settings-card">
+          <h2>Подключение</h2>
+          <label>Gateway URL<input id="gatewayUrl" placeholder="https://bali-academy.vercel.app" /></label>
+          <label>Admin API Key<input id="adminKey" type="password" placeholder="••••••••••••" /></label>
+          <p class="hint">Ключ хранится локально через системное шифрование Electron.</p>
+          <button id="saveSettingsBtn" class="primary">Сохранить настройки</button>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
